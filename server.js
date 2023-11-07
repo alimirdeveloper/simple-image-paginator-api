@@ -201,8 +201,11 @@ app.use(cors({
 }));
 
 app.get('/posts', (req, res) => {
-  const page = parseInt(req.query.page) || 1; // Parse page as an integer (default to 1)
-  const perPage = parseInt(req.query.perPage) || 10; // Parse perPage as an integer (default to 10)
+    /**
+     * use max to avoid negative number's
+     */
+  const page  =  Math.max(1, parseInt(req.query.page)) ; 
+  const perPage = Math.max(1 , parseInt(req.query.perPage)) ; 
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
 
